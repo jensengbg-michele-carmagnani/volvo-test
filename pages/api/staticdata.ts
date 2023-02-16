@@ -10,6 +10,6 @@ export default async function handler(
   const jsonDirectory = path.join(process.cwd(), 'public/api');
 
   const carsArray = await fs.readFile(jsonDirectory + '/cars.json', 'utf8');
-  console.log(carsArray);
+
   res.status(200).json(carsArray);
 }

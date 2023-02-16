@@ -1,6 +1,7 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
-import CarouselCars from './CarouselCars';
+import CarouselCars from './Carousel';
 
 type Props = {};
 
