@@ -5,3 +5,7 @@ export interface CarInfo {
   modelType: string;
   imageUrl: string;
 }
+
+export interface ChunkedCarInfo {
+  carChunk: [CarInfo[]];
+}

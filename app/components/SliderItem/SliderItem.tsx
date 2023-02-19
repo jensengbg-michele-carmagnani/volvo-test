@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
-import { Block, Button, Click, Flex } from 'vcc-ui';
+import { Click } from 'vcc-ui';
 import Link from 'next/link';
 type Props = {
   id: string;
@@ -11,25 +11,34 @@ type Props = {
   imageUrl: string;
 };
 
-const CardItem = ({ id, modelName, bodyType, modelType, imageUrl }: Props) => {
+const SliderItem = ({
+  id,
+  modelName,
+  bodyType,
+  modelType,
+  imageUrl,
+}: Props) => {
   return (
-    <div className="md:text-lg relative">
-      <div className=" space-y-5">
-        <span className="text-gray-400 font-light">{bodyType}</span>
-        <div className="">
-          <span className="">{modelName}-</span>{' '}
-          <span className="text-gray-400 font-light">{modelType}</span>
+    <div className="text-base md:text-lg relative">
+      <div className="  pb-2 ">
+        <span className="text-gray-400 font-normal">{bodyType}</span>
+        <div className="flex flex-col">
+          <p>
+            <span className="pr-1">{modelName}</span>{' '}
+            <span className="hidden text-gray-400 font-light">{modelType}</span>
+          </p>
+          <p className="text-gray-400 font-light md:hidden">{modelType}</p>
         </div>
       </div>
       <Image
         width={940}
         height={725}
         src={imageUrl}
-        className="md:w-[300px] md:h-[300px] object-contain "
+        className="sm:w-[200px] sm:h-[180px] md:w-[320px] md:h-[300px] object-contain "
         alt={modelName}
       />
 
-      <div className="space-x-10 pt-8 flex justify-center capitalize text-[#3A70B7] font-semibold">
+      <div className="space-x-4 md:space-x-10 pt-8 flex justify-center capitalize text-[#3A70B7] font-semibold">
         <Link href={`${id}/learn`} className="text-decoration-none">
           <Click className="flex justify-center items-center text-lg ">
             <div className="flex justify-center items-center hover:text-[#3A70B7]/80 transition-all duration-150">
@@ -40,9 +49,9 @@ const CardItem = ({ id, modelName, bodyType, modelType, imageUrl }: Props) => {
         </Link>
 
         <Link href={`${id}/shop`} className="text-decoration-none">
-          <Click className="flex justify-center items-center md:text-lg ">
+          <Click className="flex justify-center items-center text-lg md:text-lg ">
             <div className="flex justify-center items-center hover:text-[#3A70B7]/80 transition-all duration-150">
-              <span className="tra1cking-wide pr-2">SHOP</span>{' '}
+              <span className="tracking-wide pr-2">SHOP</span>{' '}
               <ChevronRightIcon className="h-5 w-5  " />
             </div>
           </Click>
@@ -52,4 +61,4 @@ const CardItem = ({ id, modelName, bodyType, modelType, imageUrl }: Props) => {
   );
 };
 
-export default CardItem;
+export default SliderItem;

@@ -1,0 +1,44 @@
+.carousel {
+  position: relative;
+  .carousel-indicators {
+    bottom: -15%;
+    button {
+      background-color: white;
+    }
+  }
+}
+.carousel-control-prev {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 110%;
+  left: 90%;
+  z-index: 5;
+  padding: 0;
+  color: green;
+  text-align: center;
+  border-radius: 50%;
+  border: solid 1px black;
+  padding: 10px;
+}
+
+.carousel-control-next {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 110%;
+  left: 94%;
+  z-index: 5;
+  padding: 0;
+  color: green;
+  text-align: center;
+  border-radius: 50%;
+  border: solid 1px black;
+  padding: 10px;
+}
+
+[aria-label] {
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50%;
+}
