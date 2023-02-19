@@ -19,28 +19,30 @@ const SliderItem = ({
   imageUrl,
 }: Props) => {
   return (
-    <div className="text-base md:text-lg relative">
-      <div className="  pb-2 ">
+    <div className="text-base md:text-lg relative mx-6 md:mx-0 ">
+      <div className="pb-3">
         <span className="text-gray-400 font-normal">{bodyType}</span>
         <div className="flex flex-col">
-          <p>
+          <p className="flex">
             <span className="pr-1">{modelName}</span>{' '}
-            <span className="hidden text-gray-400 font-light">{modelType}</span>
+            <span className="hidden md:block text-gray-400 font-light">
+              {modelType}
+            </span>
           </p>
           <p className="text-gray-400 font-light md:hidden">{modelType}</p>
         </div>
       </div>
       <Image
-        width={940}
-        height={725}
+        width={800}
+        height={600}
         src={imageUrl}
-        className="sm:w-[200px] sm:h-[180px] md:w-[320px] md:h-[300px] object-contain "
+        className="sm:w-[200px] sm:h-[180px] md:w-[300px] md:h-[225px] object-contain "
         alt={modelName}
       />
 
-      <div className="space-x-4 md:space-x-10 pt-8 flex justify-center capitalize text-[#3A70B7] font-semibold">
+      <div className="space-x-4 md:space-x-4 pt-8 flex justify-center capitalize text-[#3A70B7] font-semibold text-lg md:text-sm">
         <Link href={`${id}/learn`} className="text-decoration-none">
-          <Click className="flex justify-center items-center text-lg ">
+          <Click className="flex justify-center items-center ">
             <div className="flex justify-center items-center hover:text-[#3A70B7]/80 transition-all duration-150">
               <span className="tracking-wide pr-2">LEARN</span>{' '}
               <ChevronRightIcon className="h-5 w-5" />
@@ -49,7 +51,7 @@ const SliderItem = ({
         </Link>
 
         <Link href={`${id}/shop`} className="text-decoration-none">
-          <Click className="flex justify-center items-center text-lg md:text-lg ">
+          <Click className="flex justify-center items-center  ">
             <div className="flex justify-center items-center hover:text-[#3A70B7]/80 transition-all duration-150">
               <span className="tracking-wide pr-2">SHOP</span>{' '}
               <ChevronRightIcon className="h-5 w-5  " />

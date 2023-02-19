@@ -21,7 +21,7 @@ const Slider = ({ data, data2 }: Props) => {
 
   return (
     <>
-      <div className="flex md:hidden">
+      <div className="flex sm:hidden md:hidden">
         {data2 && (
           <Carousel
             variant="dark"
@@ -34,22 +34,20 @@ const Slider = ({ data, data2 }: Props) => {
           >
             {data2.map((car: CarInfo) => (
               <Carousel.Item key={car.id} className="">
-                <div className="w-80 grid grid-cols-1 md:grid-cols-4 gap-4 mx-5  sm:w-full overflow-y-hidden">
-                  <CardItem
-                    key={car.id}
-                    id={car.id}
-                    modelName={car.modelName}
-                    bodyType={car.bodyType}
-                    modelType={car.modelType}
-                    imageUrl={car.imageUrl}
-                  />
-                </div>
+                <CardItem
+                  key={car.id}
+                  id={car.id}
+                  modelName={car.modelName}
+                  bodyType={car.bodyType}
+                  modelType={car.modelType}
+                  imageUrl={car.imageUrl}
+                />
               </Carousel.Item>
             ))}
           </Carousel>
         )}
       </div>
-      <div className="hidden sm:hidden md:flex relative">
+      <div className="hidden sm:flex  md:flex relative">
         {data && (
           <Carousel
             ref={refControl}
@@ -63,7 +61,7 @@ const Slider = ({ data, data2 }: Props) => {
           >
             {data.map((chuckedArray: CarInfo[], index: number) => (
               <Carousel.Item key={index} className="">
-                <div className="w-80  grid grid-cols-2 md:grid-cols-4 gap-4 mx-5  sm:w-full overflow-y-hidden">
+                <div className=" grid sm:grid-cols-2 md:grid-cols-4 gap-4  sm:w-full overflow-y-hidden">
                   {chuckedArray.map((car: CarInfo) => (
                     <CardItem
                       key={car.id}
