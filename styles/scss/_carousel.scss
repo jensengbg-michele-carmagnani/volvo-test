@@ -12,6 +12,7 @@
 //    is the upcoming slide in transition.
 .carousel {
   position: relative;
+
   .carousel-indicators {
     bottom: -20%;
     button {
@@ -63,7 +64,7 @@
 .active.carousel-item-start {
   transform: translateX(-100%);
 }
-.carousel-inner {
+.carousel-inner.active {
   position: relative;
   width: 100%;
   overflow: hidden;

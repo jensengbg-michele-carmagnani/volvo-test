@@ -6,7 +6,7 @@ const nextConfig = {
     appDir: true,
   },
   image: {
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'flowbite.com'],
   },
 };
 
