@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <html>
       <head></head>
-      <body>
+      <body className="">
         <VccProvider>{children}</VccProvider>
       </body>
     </html>

@@ -36,7 +36,7 @@ const SliderItem = ({
         width={800}
         height={600}
         src={imageUrl}
-        className="sm:w-[200px] sm:h-[180px] md:w-[300px] md:h-[225px] object-contain "
+        className=" md:w-[400px] md:h-[225px] object-cover "
         alt={modelName}
       />
 
