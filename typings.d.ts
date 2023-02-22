@@ -1,3 +1,8 @@
+export type NavLink = {
+  targetSegment: string | null | undefined;
+  name: string;
+  path: string;
+};
 export interface CarInfo {
   id: string;
   modelName: string;

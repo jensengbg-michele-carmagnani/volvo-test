@@ -1,7 +1,6 @@
-import '../styles/scss/main.scss';
 import '../styles/globals.css';
 
-import VccProvider from './components/VccProvider/VccProvider';
+import VccProvider from './components/vcc-provider/VccProvider';
 
 export default function RootLayout({
   children,
@@ -11,7 +10,7 @@ export default function RootLayout({
   return (
     <html>
       <head></head>
-      <body className="">
+      <body>
         <VccProvider>{children}</VccProvider>
       </body>
     </html>

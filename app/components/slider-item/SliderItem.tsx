@@ -3,6 +3,7 @@ import React from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import { Click } from 'vcc-ui';
 import Link from 'next/link';
+
 type Props = {
   id: string;
   modelName: string;
