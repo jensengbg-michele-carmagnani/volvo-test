@@ -34,31 +34,37 @@ const Slider = ({ data, data2 }: Props) => {
   //     handleOnNextClicked();
   //   }, 3000);
   // };
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setCurrentIndex(window.scrollX);
-  //   };
+  const handleScroll = () => {
+    setCurrentIndex(window.scrollX);
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
 
-  //   window.addEventListener('scroll', handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   console.log(currentIndex);
   return (
-    <div className="relative">
+    <div
+      onScroll={handleScroll}
+      className="flex relative overflow-hidden flex-col text-left md:flex-row max-w-full px-10 justify-evenly mx-auto items-center xl:px-10 space-y-6 "
+    >
       <div
         // onScroll={handleOnNextClicked}
-        className="carousel carousel-start p-4 space-x-4 max-w-sm"
+        className="w-full  flex space-x-5 overflow-x-scroll  snap-x snap-mandatory scrollbar-none "
       >
         {data2.map((carItem, index) => (
-          <div id={`item${index}`} key={carItem.id} className="carousel-item ">
+          <div
+            id={`item${index}`}
+            key={carItem.id}
+            className="flex flex-col items-center md:space-y-7 flex-shrink-0 w-[250px] md:w-[600px] xl:w-[900px] snap-start bg-[#292929]  duration-200 overflow-hidden "
+          >
             <Image
               width={800}
               height={600}
               src={carItem.imageUrl}
-              className=""
+              className="object-fit"
               alt={carItem.modelName}
             />
             {/* <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 carousel-item">
@@ -80,7 +86,7 @@ const Slider = ({ data, data2 }: Props) => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center w-full py-2 gap-2">
+      <div className="flex justify-center w-full py-2 gap-2 md:hidden">
         {data2.map((carItem, index) => (
           <a
             key={carItem.id}
@@ -88,7 +94,7 @@ const Slider = ({ data, data2 }: Props) => {
             className={`${
               currentIndex === index
                 ? 'bg-black h-3 w-3 rounded-lg'
-                : 'h-3 w-3 bg-slate-400/20 rounded-lg'
+                : 'h-3 w-3 bg-slate-400/20 rounded-lg '
             } `}
             onClick={() => setCurrentIndex(index)}
           ></a>
