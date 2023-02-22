@@ -1,7 +1,5 @@
 'use client';
 
-import { motion, useScroll } from 'framer-motion';
-
 import { useEffect, useState } from 'react';
 
 import { CarInfo } from 'typings';
@@ -10,7 +8,7 @@ import SliderItem from '../slider-item/SliderItem';
 import Indicators from '../indicators/Indicators';
 import SliderControllers from '../slider-controllers/SliderControllers';
 import { filterByBodyType } from 'helpers/filterBodyType';
-import Button from '@/components/ui/spinner/button/Button';
+
 import ModelType from '../model-type/ModelType';
 
 type Props = {
