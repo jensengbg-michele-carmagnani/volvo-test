@@ -56,7 +56,7 @@ const Slider = ({ data, data2 }: Props) => {
       </div>
 
       {/* mobile index indicators */}
-      <div className="flex justify-center w-full pt- gap-2  md:hidden">
+      <div className="flex justify-center w-full pt-10 gap-2 md:hidden">
         {data2.map((carItem, index) => (
           <a
             onClick={() => setCurrentIndex(index)}
@@ -79,7 +79,7 @@ const Slider = ({ data, data2 }: Props) => {
         >
           <a href={`#item${currentIndex}`}>
             <div className="">
-              <ChevronLeftIcon className="h-10 w-10  border border-1  p-1 rounded-full " />
+              <ChevronLeftIcon className="h-10 w-10 border border-1 p-1 rounded-full" />
             </div>
           </a>
         </button>
@@ -90,7 +90,7 @@ const Slider = ({ data, data2 }: Props) => {
         >
           <a href={`#item${currentIndex + 3}`}>
             <div>
-              <ChevronRightIcon className="h-10 w-10  border border-1 p-1 rounded-full" />
+              <ChevronRightIcon className="h-10 w-10 border border-1 p-1 rounded-full" />
             </div>
           </a>
         </button>
