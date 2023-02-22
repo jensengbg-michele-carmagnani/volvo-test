@@ -19,7 +19,7 @@ const SliderItem = ({
   imageUrl,
 }: Props) => {
   return (
-    <div className="text-base md:text-lg relative mx-6 md:mx-0 ">
+    <div className="text-base md:text-lg relative">
       <div className="pb-3">
         <span className="text-gray-400 font-normal">{bodyType}</span>
         <div className="flex flex-col">

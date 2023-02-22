@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 
 import { CarInfo } from 'typings';
 import CardItem from '../SliderItem/SliderItem';
-import SliderItem2 from '../SliderItem/SliderItem2';
+import SliderItem from '../SliderItem/SliderItem';
 
 type Props = {
   data: CarInfo[][];
@@ -58,15 +58,15 @@ const Slider = ({ data, data2 }: Props) => {
           <div
             id={`item${index}`}
             key={carItem.id}
-            className="flex flex-col items-center md:space-y-7 flex-shrink-0 w-[250px] md:w-[600px] xl:w-[900px] snap-start bg-[#292929]  duration-200 overflow-hidden "
+            className="flex flex-col items-center md:space-y-7 flex-shrink-0 w-[250px] md:w-[600px] xl:w-[900px] snap-start  duration-200 overflow-hidden "
           >
-            <Image
-              width={800}
-              height={600}
-              src={carItem.imageUrl}
-              className="object-fit"
-              alt={carItem.modelName}
+            <SliderItem
+              id={carItem.id}
+              modelName={carItem.modelName}
+              bodyType={carItem.bodyType}
+              imageUrl={carItem.imageUrl}
             />
+
             {/* <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 carousel-item">
               <a
                 href={`#item${index - 1}`}
