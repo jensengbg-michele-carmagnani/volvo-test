@@ -3,7 +3,6 @@
 import { motion, useScroll } from 'framer-motion';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import { CarInfo } from 'typings';
 import SliderItem from '../slider-item/SliderItem';
@@ -11,7 +10,8 @@ import SliderItem from '../slider-item/SliderItem';
 import Indicators from '../indicators/Indicators';
 import SliderControllers from '../slider-controllers/SliderControllers';
 import { filterByBodyType } from 'helpers/filterBodyType';
-import Button from '../ui/spinner/button/Button';
+import Button from '@/components/ui/spinner/button/Button';
+import ModelType from '../model-type/ModelType';
 
 type Props = {
   dataCar: CarInfo[];
@@ -48,28 +48,17 @@ const Slider = ({ dataCar }: Props) => {
 
   return (
     <>
-      <section className="space-y-10 pb-32 ">
-        <div className="text-4xl font-semibold text-center">Our Model</div>
-        <div className="flex space-x-4 text-lg font-light text-gray-500">
-          {filteredBodyType.map((carItem: CarInfo) => (
-            <Button
-              key={carItem.id}
-              onClick={() => handleOnFilterBody(carItem.bodyType)}
-            >
-              <span className="underline">{carItem.bodyType}</span>
-            </Button>
-          ))}
-          <Button onClick={() => setData(dataCar)} className="">
-            <span className="underline">All({dataCar.length})</span>
-          </Button>
-        </div>
-      </section>
+      <ModelType
+        dataCar={dataCar}
+        filteredCar={filteredBodyType}
+        setData={setData}
+        handleOnFilterBody={handleOnFilterBody}
+      />
 
       <div
         className={`flex flex-col relative overflow-hidden  max-w-sm md:max-w-6xl px-10 justify-evenly mx-auto items-center xl:px-10`}
       >
         <div
-          // onScroll={handleOnNextClicked}
           className={`relative w-full flex space-x-5 overflow-x-scroll scroll-smooth snap-x snap-mandatory scrollbar-none duration-150 cursor-pointer`}
         >
           {data.map((carItem: CarInfo, index) => (
@@ -97,7 +86,6 @@ const Slider = ({ dataCar }: Props) => {
         />
 
         {/* desktop index controller */}
-
         <SliderControllers
           currentValue={currentIndex}
           data={data}

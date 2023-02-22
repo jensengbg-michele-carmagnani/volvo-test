@@ -15,6 +15,8 @@ const SliderControllers = ({
   handleScrollNext,
   handleScrollPrev,
 }: Props) => {
+  console.log(currentValue + 3 === data.length - 1);
+  console.log(data.length);
   return (
     <div className="hidden md:flex items-center justify-end w-full pt-10 space-x-2 cursor-pointer ">
       <button
