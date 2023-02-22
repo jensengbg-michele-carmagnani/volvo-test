@@ -15,7 +15,7 @@ const ModelType = ({
   dataCar,
 }: Props) => {
   return (
-    <section className="space-y-10 pb-20 md:pb-32 ">
+    <section className="space-y-10 pb-14 md:pb-32 ">
       <div className="text-4xl font-semibold text-center">Our Model</div>
       <div className="flex space-x-4 text-lg font-light text-gray-500">
         {filteredCar.map((carItem: CarInfo) => (
