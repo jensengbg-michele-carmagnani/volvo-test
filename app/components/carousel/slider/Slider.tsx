@@ -49,7 +49,7 @@ const Slider = ({ dataCar }: Props) => {
         dataCar={dataCar}
         filteredCar={filteredBodyType}
         setData={setData}
-        handleOnFilterBody={handleOnClickFilterBody}
+        handleOnClickFilterBody={handleOnClickFilterBody}
       />
 
       <div
