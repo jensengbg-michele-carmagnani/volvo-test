@@ -5,6 +5,7 @@ type Props = {
   dataCar: CarInfo[];
   filteredCar: CarInfo[];
   setData: (data: CarInfo[]) => void;
+  setCurrentIndex: (index: number) => void;
   handleOnClickFilterBody: (bodyType: string) => void;
 };
 const ModelType = ({
@@ -12,6 +13,7 @@ const ModelType = ({
   handleOnClickFilterBody,
   setData,
   dataCar,
+  setCurrentIndex,
 }: Props) => {
   return (
     <section className="space-y-10 pb-14 md:pb-32 ">
@@ -25,7 +27,12 @@ const ModelType = ({
             <span className="underline">{carItem.bodyType}</span>
           </Button>
         ))}
-        <Button onClick={() => setData(dataCar)} className="">
+        <Button
+          onClick={() => {
+            setData(dataCar), setCurrentIndex(0);
+          }}
+          className=""
+        >
           <span className="underline">All({dataCar.length})</span>
         </Button>
       </div>

@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import React from 'react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import { Click } from 'vcc-ui';
 import Link from 'next/link';
+import { MotionValue, useScroll } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 type Props = {
   id: string;
@@ -10,17 +11,28 @@ type Props = {
   bodyType: string;
   modelType: string;
   imageUrl: string;
+  setProgress: (progress: any) => void;
 };
 
 const SliderItem = ({
   id,
+  setProgress,
   modelName,
   bodyType,
   modelType,
   imageUrl,
 }: Props) => {
+  const ref = useRef(null);
+  const { scrollXProgress } = useScroll({
+    target: ref,
+    offset: ['end end', 'start start'],
+  });
+  useEffect(() => {
+    return setProgress(scrollXProgress);
+  }, [scrollXProgress]);
+
   return (
-    <div className="text-base md:text-lg relative">
+    <div ref={ref} className="text-base md:text-lg relative">
       <div className="pb-3">
         <span className="text-gray-400 font-normal">{bodyType}</span>
         <div className="flex flex-col">

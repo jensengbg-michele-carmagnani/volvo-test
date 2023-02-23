@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
+import { useEffect, useRef, useState } from 'react';
+import { useScroll, motion } from 'framer-motion';
 import { CarInfo } from 'typings';
 import SliderItem from '../slider-item/SliderItem';
 
 import Indicators from '../indicators/Indicators';
 import SliderControllers from '../slider-controllers/SliderControllers';
 import { filterByBodyType } from 'helpers/filterBodyType';
-
 import ModelType from '../model-type/ModelType';
 
 type Props = {
@@ -19,6 +18,12 @@ const Slider = ({ dataCar }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filteredBodyType, setFilteredBodyType] = useState<CarInfo[]>([]);
   const [data, setData] = useState<CarInfo[]>(dataCar);
+
+  {
+    /*framer*/
+  }
+  const refSlide = useRef(null);
+  const { scrollXProgress } = useScroll({ container: refSlide });
 
   const handleScrollNext = (slideItemNumber: number) => {
     if (slideItemNumber + 3 === data.length - 1) {
@@ -44,21 +49,27 @@ const Slider = ({ dataCar }: Props) => {
     );
     setData(filteredCar);
   };
-
+  const [progress, setProgress] = useState(0);
+  console.log('progress', progress);
   return (
     <>
+      <motion.div
+        style={{ scaleX: scrollXProgress }}
+        className="bg-blue-500 h-1 fixed inset-0 origin-[0%]"
+      />
       <ModelType
+        setCurrentIndex={setCurrentIndex}
         dataCar={dataCar}
         filteredCar={filteredBodyType}
         setData={setData}
         handleOnClickFilterBody={handleOnClickFilterBody}
       />
-
       <div
-        className={`flex flex-col relative overflow-hidden  max-w-sm md:max-w-6xl px-10 justify-evenly mx-auto items-center xl:px-10`}
+        className={`flex flex-col relative overflow-hidden max-w-sm md:max-w-6xl px-10 justify-evenly mx-auto items-center xl:px-10`}
       >
         <div
           className={`relative w-full flex space-x-5 overflow-x-scroll scroll-smooth snap-x snap-mandatory scrollbar-none duration-150 cursor-pointer`}
+          ref={refSlide}
         >
           {data.map((carItem: CarInfo, index) => (
             <div
@@ -67,6 +78,7 @@ const Slider = ({ dataCar }: Props) => {
               className="flex flex-col items-center flex-shrink-0 w-[250px] snap-start duration-200 overflow-hidden "
             >
               <SliderItem
+                setProgress={setProgress}
                 id={carItem.id}
                 modelName={carItem.modelName}
                 bodyType={carItem.bodyType}
