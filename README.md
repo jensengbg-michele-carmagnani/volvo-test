@@ -59,15 +59,10 @@ Please try to use Typescript and follow all the code isolated to that component 
 
 ```bash
 - typings.tsx
-- components
-    - TestComponent
-        - interfaces
-        - hooks
-        - components
-        - __tests__
-            - TestComponent.test.tsx
-        - TestComponent.tsx
-        - index.tsx
+- helpers
+  - filterBodyType.tsx
+- styles
+  - globals.css
 - app
     - components
         - ui

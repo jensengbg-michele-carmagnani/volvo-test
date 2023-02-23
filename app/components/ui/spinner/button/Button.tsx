@@ -5,12 +5,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   hover?: string;
   rounded?: boolean;
   onClick?: () => void;
-  key?: string;
 }
 
 const Button: React.FC<Props> = ({
   style,
-  key,
   children,
   onClick,
   disabled,
@@ -18,11 +16,9 @@ const Button: React.FC<Props> = ({
 }) => {
   return (
     <button
-      key={key}
       disabled={disabled}
       style={style}
       onClick={onClick}
-      // eslint-disable-next-line react/button-has-type
       type={type}
       className={` disabled:opacity-80 ${style}`}
     >
