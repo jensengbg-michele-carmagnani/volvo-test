@@ -12,12 +12,10 @@ type Props = {
   bodyType: string;
   modelType: string;
   imageUrl: string;
-  setProgress: (progress: any) => void;
 };
 
 const SliderItem = ({
   id,
-  setProgress,
   modelName,
   bodyType,
   modelType,
