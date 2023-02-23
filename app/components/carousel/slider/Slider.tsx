@@ -49,8 +49,7 @@ const Slider = ({ dataCar }: Props) => {
     );
     setData(filteredCar);
   };
-  const [progress, setProgress] = useState(0);
-  console.log('progress', progress);
+
   return (
     <>
       <motion.div
@@ -78,7 +77,6 @@ const Slider = ({ dataCar }: Props) => {
               className="flex flex-col items-center flex-shrink-0 w-[250px] snap-start duration-200 overflow-hidden "
             >
               <SliderItem
-                setProgress={setProgress}
                 id={carItem.id}
                 modelName={carItem.modelName}
                 bodyType={carItem.bodyType}
