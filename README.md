@@ -45,9 +45,13 @@ Two extra SVG icons are also provided by our designer which are stored under `do
 - If you use our design system component library, [VCC-UI](https://vcc-ui.vercel.app/)
 - If you add a filter bar on the top to filter cars by `bodyType`
 
-# Conclusion
+# Report
 
 The app is entirely made with Nextjs 13 with experimental app, so there is a substantial shift mind set in how I used to be in React. The style is supported by Tailwind with no extra plugin.
+
+# Running the project locally
+
+- npm run dev
 
 ## Code conventions
 

@@ -37,20 +37,19 @@ const Slider = ({ dataCar }: Props) => {
     setFilteredBodyType(filteredCar);
   }, []);
 
-  const handleOnFilterBody = (bodyType: string) => {
+  const handleOnClickFilterBody = (bodyType: string) => {
     const filteredCar: CarInfo[] = dataCar.filter(
       (car) => car.bodyType === bodyType
     );
     setData(filteredCar);
   };
-
   return (
     <>
       <ModelType
         dataCar={dataCar}
         filteredCar={filteredBodyType}
         setData={setData}
-        handleOnFilterBody={handleOnFilterBody}
+        handleOnFilterBody={handleOnClickFilterBody}
       />
 
       <div

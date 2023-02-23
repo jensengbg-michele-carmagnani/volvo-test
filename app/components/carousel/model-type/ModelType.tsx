@@ -5,12 +5,12 @@ type Props = {
   dataCar: CarInfo[];
   filteredCar: CarInfo[];
   setData: (data: CarInfo[]) => void;
-  handleOnFilterBody: (bodyType: string) => void;
+  handleOnClickFilterBody: (bodyType: string) => void;
 };
 
 const ModelType = ({
   filteredCar,
-  handleOnFilterBody,
+  handleOnClickFilterBody,
   setData,
   dataCar,
 }: Props) => {
@@ -21,7 +21,7 @@ const ModelType = ({
         {filteredCar.map((carItem: CarInfo) => (
           <Button
             key={carItem.id}
-            onClick={() => handleOnFilterBody(carItem.bodyType)}
+            onClick={() => handleOnClickFilterBody(carItem.bodyType)}
           >
             <span className="underline">{carItem.bodyType}</span>
           </Button>
