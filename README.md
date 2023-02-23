@@ -45,6 +45,10 @@ Two extra SVG icons are also provided by our designer which are stored under `do
 - If you use our design system component library, [VCC-UI](https://vcc-ui.vercel.app/)
 - If you add a filter bar on the top to filter cars by `bodyType`
 
+# Conclusion
+
+The app is entirely made with Nextjs 13 with experimental app, so there is a substantial shift mind set in how I used to be in React. The style is supported by Tailwind with no extra plugin.
+
 ## Code conventions
 
 Please try to use Typescript and follow all the code isolated to that component inside the folder structure. If any code is to be used in several components, move it outside to the root.
@@ -73,24 +77,22 @@ Please try to use Typescript and follow all the code isolated to that component 
       - page.tsx
 ```
 
-# Deployed domain
+## Deployed domain
 
 [https://volvo-test-nine.vercel.app/](https://volvo-test-nine.vercel.app/)
 
+## Server Component
 
-## Conclusion 
-
-The app is entirely made with Nextjs 13 with experimental app, so there is a substantial shift mind set in how I used to be in React.
-# Server Component
 All components inside the app directory are React Server Components by default, including special files and collocated components. This allows you to automatically adopt Server Components with no extra work, and achieve great performance out of the box.
-# Client Component 
+
+## Client Component
+
 Client Components enable you to add client-side interactivity to your application. In Next.js, they are pre-rendered on the server and hydrated on the client.
 
-# Achievement  
-The carousel is made with Tailwind css with no support of any plugin so it's been a bit challenging to create interactions with the scrolling that could create a change of state. 
+## Achievement
 
-# Issue
-The logic of the slide indicator in mobile don't have logic at the moment but they work only on click. The idgit aea is to support the mobile with a plugin like Swiper, Framer or Gesture for React.
- 
+The carousel is made with Tailwind css with no support of any plugin so it's been a bit challenging to create interactions with the scrolling that could create a change of state.
 
- 
+## Issue
+
+- The logic of the slide indicator in mobile don't get update on swipe but only on click. The idea is to support the mobile with a plugin like Swiper, Framer or Gesture for React that could help to create a reference on the swipe therefore keep track of the slide next and prev.
