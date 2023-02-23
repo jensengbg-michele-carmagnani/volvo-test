@@ -35,6 +35,7 @@ const Slider = ({ dataCar }: Props) => {
     filterByBodyType(data);
     const filteredCar: CarInfo[] = filterByBodyType(data);
     setFilteredBodyType(filteredCar);
+    setCurrentIndex(0);
   }, []);
 
   const handleOnClickFilterBody = (bodyType: string) => {
@@ -43,6 +44,7 @@ const Slider = ({ dataCar }: Props) => {
     );
     setData(filteredCar);
   };
+
   return (
     <>
       <ModelType
