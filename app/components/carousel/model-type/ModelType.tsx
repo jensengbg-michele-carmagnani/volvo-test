@@ -7,7 +7,6 @@ type Props = {
   setData: (data: CarInfo[]) => void;
   handleOnClickFilterBody: (bodyType: string) => void;
 };
-
 const ModelType = ({
   filteredCar,
   handleOnClickFilterBody,
