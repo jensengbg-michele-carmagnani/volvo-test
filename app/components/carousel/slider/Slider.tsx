@@ -64,7 +64,8 @@ const Slider = ({ dataCar }: Props) => {
         handleOnClickFilterBody={handleOnClickFilterBody}
       />
       <div
-        className={`flex flex-col relative overflow-hidden max-w-sm md:max-w-6xl px-10 justify-evenly mx-auto items-center xl:px-10`}
+        className={`flex flex-col relative overflow-hidden max-w-sm 
+        md:max-w-6xl pl-8 justify-evenly mx-auto items-center xl:px-10`}
       >
         <div
           className={`relative w-full flex space-x-5 overflow-x-scroll scroll-smooth snap-x snap-mandatory scrollbar-none duration-150 cursor-pointer`}
