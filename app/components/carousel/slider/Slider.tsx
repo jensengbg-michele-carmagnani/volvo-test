@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { useScroll, motion } from 'framer-motion';
-import { CarInfo } from 'typings';
-import SliderItem from '../slider-item/SliderItem';
+import { useEffect, useRef, useState } from "react";
+import { useScroll, motion } from "framer-motion";
+import { CarInfo } from "typings";
+import SliderItem from "../slider-item/SliderItem";
 
-import Indicators from '../indicators/Indicators';
-import SliderControllers from '../slider-controllers/SliderControllers';
-import { filterByBodyType } from 'helpers/filterBodyType';
-import ModelType from '../model-type/ModelType';
+import Indicators from "../indicators/Indicators";
+import SliderControllers from "../slider-controllers/SliderControllers";
+import { filterByBodyType } from "helpers/filterBodyType";
+import ModelType from "../model-type/ModelType";
 
 type Props = {
   dataCar: CarInfo[];
@@ -75,7 +75,7 @@ const Slider = ({ dataCar }: Props) => {
             <div
               id={`item${index}`}
               key={carItem.id}
-              className="flex flex-col items-center flex-shrink-0 w-[250px] snap-start duration-200 overflow-hidden "
+              className="flex items-center flex-shrink-0 w-[250px] snap-start duration-200 overflow-hidden "
             >
               <SliderItem
                 id={carItem.id}
