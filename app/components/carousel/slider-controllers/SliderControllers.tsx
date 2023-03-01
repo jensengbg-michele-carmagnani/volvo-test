@@ -1,7 +1,6 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
-import { progress } from 'framer-motion';
-import React, { useState } from 'react';
-import { CarInfo } from 'typings';
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import React, { useState } from "react";
+import { CarInfo } from "typings";
 
 type Props = {
   currentValue: number;
