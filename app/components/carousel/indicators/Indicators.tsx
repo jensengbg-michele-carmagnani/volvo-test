@@ -1,30 +1,29 @@
-'use client';
-import React, { useEffect } from 'react';
-import { CarInfo } from 'typings';
-import { motion, useAnimation } from 'framer-motion';
+"use client";
+import React, { useEffect } from "react";
+import { CarInfo } from "typings";
+import { motion, useAnimation } from "framer-motion";
 type Props = {
   data: CarInfo[];
   onClick: (index: number) => void;
   currentValue: number;
+  position: number;
 };
 
-const Indicators = ({ data, onClick, currentValue }: Props) => {
-  const control = useAnimation();
-
+const Indicators = ({ data, position }: Props) => {
   return (
-    <div className="flex justify-center w-full pt-10 gap-2 md:hidden">
-      {data.map((carItem, index) => (
-        <motion.a
-          onClick={() => onClick(index)}
-          key={carItem.id}
-          href={`#item${index}`}
-          animate={control}
+    <div
+      id="indicators"
+      className="absolute md:hidden bottom-0 flex w-full justify-center gap-2 pt-10 "
+    >
+      {data.map((image, index: number) => (
+        <motion.div
+          key={index}
           className={`${
-            currentValue === index
-              ? 'bg-black h-3 w-3 rounded-lg'
-              : 'h-3 w-3 bg-slate-400/20 rounded-lg '
-          } `}
-        ></motion.a>
+            position === index
+              ? "h-3 w-3 rounded-lg bg-black transition duration-500 ease-in-out "
+              : "h-3 w-3 rounded-lg bg-slate-300 transition duration-500 ease-in-out  "
+          } flex-col `}
+        ></motion.div>
       ))}
     </div>
   );

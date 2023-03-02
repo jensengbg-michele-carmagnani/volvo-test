@@ -9,6 +9,7 @@ import Indicators from "../indicators/Indicators";
 import SliderControllers from "../slider-controllers/SliderControllers";
 import { filterByBodyType } from "helpers/filterBodyType";
 import ModelType from "../model-type/ModelType";
+import { useSwipeable } from "react-swipeable";
 
 type Props = {
   dataCar: CarInfo[];
@@ -18,30 +19,38 @@ const Slider = ({ dataCar }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filteredBodyType, setFilteredBodyType] = useState<CarInfo[]>([]);
   const [data, setData] = useState<CarInfo[]>(dataCar);
+  const [width, setWidth] = useState({ innerWidth: 0 });
+  const [position, setPosition] = useState(0);
 
-  {
-    /*framer*/
-  }
-  const refSlide = useRef(null);
-  const { scrollXProgress } = useScroll({ container: refSlide });
+  const handlers = useSwipeable({
+    onSwipedLeft: () => onNext(),
+    onSwipedRight: () => onPrev(),
+    swipeDuration: 200,
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+  });
 
-  const handleScrollNext = (slideItemNumber: number) => {
-    if (slideItemNumber + 3 === data.length - 1) {
-      setCurrentIndex(data.length - 1);
+  const onNext = () => {
+    if (width.innerWidth < 500) {
+      if (position + 1 !== data.length - 1) {
+        setPosition(position + 1);
+      }
     }
-    setCurrentIndex(slideItemNumber);
+    if (position + 3 !== data.length - 1) {
+      setPosition(position + 1);
+    }
   };
-  const handleScrollPrev = (slideItemNumber: number) => {
-    if (slideItemNumber === 0) setCurrentIndex(0);
-    else setCurrentIndex(slideItemNumber);
+  const onPrev = () => {
+    if (position > 0) {
+      setPosition(position - 1);
+    }
   };
 
   useEffect(() => {
-    filterByBodyType(data);
-    const filteredCar: CarInfo[] = filterByBodyType(data);
-    setFilteredBodyType(filteredCar);
-    setCurrentIndex(0);
-  }, []);
+    setWidth({ innerWidth: window.innerWidth });
+    const filterByBody: CarInfo[] = filterByBodyType(dataCar);
+    setFilteredBodyType(filterByBody);
+  }, [dataCar]);
 
   const handleOnClickFilterBody = (bodyType: string) => {
     const filteredCar: CarInfo[] = dataCar.filter(
@@ -51,11 +60,10 @@ const Slider = ({ dataCar }: Props) => {
   };
 
   return (
-    <>
-      <motion.div
-        style={{ scaleX: scrollXProgress }}
-        className="bg-blue-500 h-1 fixed inset-0 origin-[0%]"
-      />
+    <div
+      id="carousel"
+      className="pl-6 py-10 md:pl-0 relative  flex flex-col justify-center items-center md:w-[1280px] w-[400px] overflow-hidden "
+    >
       <ModelType
         setCurrentIndex={setCurrentIndex}
         dataCar={dataCar}
@@ -64,46 +72,39 @@ const Slider = ({ dataCar }: Props) => {
         handleOnClickFilterBody={handleOnClickFilterBody}
       />
       <div
-        className={`flex flex-col relative overflow-hidden max-w-sm 
-        md:max-w-6xl pl-8 justify-evenly mx-auto items-center xl:px-10`}
+        {...handlers}
+        id="row"
+        className={` relative overflow-hidden min-w-5xl flex h-[400px] w-full`}
       >
-        <div
-          className={`relative w-full flex space-x-5 overflow-x-scroll scroll-smooth snap-x snap-mandatory scrollbar-none duration-150 cursor-pointer`}
-          ref={refSlide}
-        >
-          {data.map((carItem: CarInfo, index) => (
-            <div
-              id={`item${index}`}
-              key={carItem.id}
-              className="flex items-center flex-shrink-0 w-[250px] snap-start duration-200 overflow-hidden "
-            >
-              <SliderItem
-                id={carItem.id}
-                modelName={carItem.modelName}
-                bodyType={carItem.bodyType}
-                imageUrl={carItem.imageUrl}
-                modelType={carItem.modelType}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* mobile index indicators */}
-        <Indicators
-          data={data}
-          onClick={setCurrentIndex}
-          currentValue={currentIndex}
-        />
-
-        {/* desktop index controller */}
-        <SliderControllers
-          currentValue={currentIndex}
-          data={data}
-          handleScrollNext={handleScrollNext}
-          handleScrollPrev={handleScrollPrev}
-        />
+        {data.map((carItem: CarInfo, index) => (
+          <SliderItem
+            key={carItem.id}
+            id={carItem.id}
+            position={position}
+            index={index}
+            modelName={carItem.modelName}
+            bodyType={carItem.bodyType}
+            imageUrl={carItem.imageUrl}
+            modelType={carItem.modelType}
+          />
+        ))}
       </div>
-    </>
+
+      {/* mobile index indicators */}
+      <SliderControllers
+        onNext={onNext}
+        onPrev={onPrev}
+        data={data}
+        position={position}
+      />
+      <Indicators
+        position={position}
+        data={data}
+        onClick={setCurrentIndex}
+        currentValue={currentIndex}
+      />
+      {/* desktop index controller */}
+    </div>
   );
 };
 
