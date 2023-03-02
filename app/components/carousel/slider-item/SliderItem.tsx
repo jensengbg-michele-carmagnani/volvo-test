@@ -26,8 +26,7 @@ const SliderItem = ({
 }: Props) => {
   return (
     <motion.div
-      id="container"
-      className=" text-base text-left absolute left-5 overflow-hidden flex flex-col justify-center items-center w-[300px] h-[400px] "
+      className="text-base absolute left-5 flex flex-col justify-center items-start w-[300px] h-[400px] "
       initial={{ x: `${index * 320 + 8}px` }}
       transition={{ type: "spring", stiffness: 100 }}
       animate={{ left: `${index - position * 321}px` }}
@@ -45,6 +44,7 @@ const SliderItem = ({
         </div>
       </div>
       <Image
+        priority
         width={800}
         height={600}
         src={imageUrl}
@@ -52,7 +52,7 @@ const SliderItem = ({
         alt={modelName}
       />
 
-      <div className="space-x-4 md:space-x-4 pt-8 flex justify-center capitalize text-[#3A70B7] font-semibold text-lg md:text-sm">
+      <div className=" self-center space-x-4 md:space-x-4 pt-8 flex justify-center capitalize text-[#3A70B7] font-semibold text-lg md:text-sm">
         <Link href={`${id}/learn`} className="text-decoration-none">
           <Click className="flex justify-center items-center ">
             <div className="flex justify-center items-center hover:text-[#3A70B7]/80 transition-all duration-150">

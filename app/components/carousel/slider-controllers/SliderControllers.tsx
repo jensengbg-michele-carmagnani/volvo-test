@@ -11,7 +11,7 @@ type Props = {
 
 const SliderControllers = ({ onNext, onPrev, position, data }: Props) => {
   return (
-    <div className=" hidden self-start max-w-[120px]  md:flex pr-1 ">
+    <div className=" hidden self-end max-w-[120px]  md:flex pr-1 ">
       <div className="flex w-screen items-center justify-between rounded-full  ">
         <button
           onClick={onPrev}

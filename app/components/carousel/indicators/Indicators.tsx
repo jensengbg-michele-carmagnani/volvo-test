@@ -13,7 +13,7 @@ const Indicators = ({ data, position }: Props) => {
   return (
     <div
       id="indicators"
-      className="absolute bottom-0 flex w-full justify-center gap-2 pt-10 "
+      className="absolute md:hidden bottom-0 flex w-full justify-center gap-2 pt-10 "
     >
       {data.map((image, index: number) => (
         <motion.div

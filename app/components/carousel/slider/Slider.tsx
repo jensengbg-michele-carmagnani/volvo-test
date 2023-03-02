@@ -20,9 +20,8 @@ const Slider = ({ dataCar }: Props) => {
   const [filteredBodyType, setFilteredBodyType] = useState<CarInfo[]>([]);
   const [data, setData] = useState<CarInfo[]>(dataCar);
   const [width, setWidth] = useState({ innerWidth: 0 });
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [position, setPosition] = useState(0);
+
   const handlers = useSwipeable({
     onSwipedLeft: () => onNext(),
     onSwipedRight: () => onPrev(),
@@ -32,9 +31,6 @@ const Slider = ({ dataCar }: Props) => {
   });
 
   const onNext = () => {
-    console.log(position);
-    console.log(data.length - 1);
-
     if (width.innerWidth < 500) {
       if (position + 1 !== data.length - 1) {
         setPosition(position + 1);
@@ -49,16 +45,12 @@ const Slider = ({ dataCar }: Props) => {
       setPosition(position - 1);
     }
   };
-  const refSlide = useRef(null);
-  const { scrollXProgress } = useScroll({ container: refSlide });
 
   useEffect(() => {
     setWidth({ innerWidth: window.innerWidth });
-    filterByBodyType(data);
-    const filteredCar: CarInfo[] = filterByBodyType(data);
-    setFilteredBodyType(filteredCar);
-    setCurrentIndex(0);
-  }, [data]);
+    const filterByBody: CarInfo[] = filterByBodyType(dataCar);
+    setFilteredBodyType(filterByBody);
+  }, [dataCar]);
 
   const handleOnClickFilterBody = (bodyType: string) => {
     const filteredCar: CarInfo[] = dataCar.filter(
@@ -72,10 +64,6 @@ const Slider = ({ dataCar }: Props) => {
       id="carousel"
       className="pl-6 py-10 md:pl-0 relative  flex flex-col justify-center items-center md:w-[1280px] w-[400px] overflow-hidden "
     >
-      <motion.div
-        style={{ scaleX: scrollXProgress }}
-        className="bg-blue-500 h-1 fixed inset-0 origin-[0%]"
-      />
       <ModelType
         setCurrentIndex={setCurrentIndex}
         dataCar={dataCar}
@@ -86,7 +74,7 @@ const Slider = ({ dataCar }: Props) => {
       <div
         {...handlers}
         id="row"
-        className={`relative overflow-hidden min-w-5xl flex h-[400px]  w-full`}
+        className={` relative overflow-hidden min-w-5xl flex h-[400px] w-full`}
       >
         {data.map((carItem: CarInfo, index) => (
           <SliderItem
