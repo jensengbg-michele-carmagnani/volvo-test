@@ -1,44 +1,35 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
 import { CarInfo } from "typings";
+("use state");
 
 type Props = {
-  currentValue: number;
-  handleScrollNext: (slideItemNumber: number) => void;
-  handleScrollPrev: (slideItemNumber: number) => void;
+  onNext: () => void;
+  onPrev: () => void;
+  position: number;
   data: CarInfo[];
 };
 
-const SliderControllers = ({
-  currentValue,
-  data,
-  handleScrollNext,
-  handleScrollPrev,
-}: Props) => {
+const SliderControllers = ({ onNext, onPrev, position, data }: Props) => {
   return (
-    <div className="hidden md:flex items-center justify-end w-full pt-10 space-x-2 cursor-pointer ">
-      <button
-        className="disabled:opacity-10"
-        disabled={currentValue === 0 || data.length - 1 <= 3}
-        onClick={() => handleScrollPrev(currentValue - 1)}
-      >
-        <a href={`#item${currentValue}`}>
-          <div className="">
-            <ChevronLeftIcon className="h-10 w-10 border border-1 p-1 rounded-full" />
-          </div>
-        </a>
-      </button>
-      <button
-        className="disabled:opacity-10 "
-        onClick={() => handleScrollNext(currentValue + 1)}
-        disabled={currentValue + 3 === data.length - 1 || data.length - 1 <= 3}
-      >
-        <a href={`#item${currentValue + 3}`}>
-          <div>
-            <ChevronRightIcon className="h-10 w-10 border border-1 p-1 rounded-full" />
-          </div>
-        </a>
-      </button>
+    <div className=" self-end max-w-[120px] hidden md:flex pr-1 ">
+      <div className="flex w-screen items-center justify-between rounded-full  ">
+        <button
+          onClick={onPrev}
+          className={`${position === 0 ? "cursor-not-allowed opacity-40" : ""}`}
+        >
+          <ChevronLeftIcon className=" h-12 w-12 rounded-full border-gray-500 border text-gray-500 transition-all duration-100 hover:scale-105 " />
+        </button>
+        <button
+          className={`${
+            position + 3 === data.length - 1
+              ? "cursor-not-allowed opacity-40"
+              : ""
+          }`}
+          onClick={onNext}
+        >
+          <ChevronRightIcon className=" h-12 w-12 rounded-full border-gray-500 border text-gray-500 transition-all duration-100 hover:opacity-80 hover:scale-105 " />
+        </button>
+      </div>
     </div>
   );
 };

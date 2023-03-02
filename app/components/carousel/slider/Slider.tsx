@@ -19,29 +19,30 @@ const Slider = ({ dataCar }: Props) => {
   const [filteredBodyType, setFilteredBodyType] = useState<CarInfo[]>([]);
   const [data, setData] = useState<CarInfo[]>(dataCar);
 
-  {
-    /*framer*/
-  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [position, setPosition] = useState(0);
+
+  const onNext = () => {
+    console.log(position);
+    console.log(data.length - 1);
+    if (position + 3 !== data.length - 1) {
+      setPosition(position + 1);
+    }
+  };
+  const onPrev = () => {
+    if (position > 0) {
+      setPosition(position - 1);
+    }
+  };
   const refSlide = useRef(null);
   const { scrollXProgress } = useScroll({ container: refSlide });
-
-  const handleScrollNext = (slideItemNumber: number) => {
-    if (slideItemNumber + 3 === data.length - 1) {
-      setCurrentIndex(data.length - 1);
-    }
-    setCurrentIndex(slideItemNumber);
-  };
-  const handleScrollPrev = (slideItemNumber: number) => {
-    if (slideItemNumber === 0) setCurrentIndex(0);
-    else setCurrentIndex(slideItemNumber);
-  };
 
   useEffect(() => {
     filterByBodyType(data);
     const filteredCar: CarInfo[] = filterByBodyType(data);
     setFilteredBodyType(filteredCar);
     setCurrentIndex(0);
-  }, []);
+  }, [data]);
 
   const handleOnClickFilterBody = (bodyType: string) => {
     const filteredCar: CarInfo[] = dataCar.filter(
@@ -51,7 +52,10 @@ const Slider = ({ dataCar }: Props) => {
   };
 
   return (
-    <>
+    <div
+      id="carousel"
+      className=" relative h-full bg-violet-300 flex flex-col justify-center items-center w-[1280px]"
+    >
       <motion.div
         style={{ scaleX: scrollXProgress }}
         className="bg-blue-500 h-1 fixed inset-0 origin-[0%]"
@@ -64,46 +68,37 @@ const Slider = ({ dataCar }: Props) => {
         handleOnClickFilterBody={handleOnClickFilterBody}
       />
       <div
-        className={`flex flex-col relative overflow-hidden max-w-sm 
-        md:max-w-6xl pl-8 justify-evenly mx-auto items-center xl:px-10`}
+        id="row"
+        className={`relative overflow-hidden min-w-5xl boder border-2 bg-green-300 flex h-[400px] w-full`}
       >
-        <div
-          className={`relative w-full flex space-x-5 overflow-x-scroll scroll-smooth snap-x snap-mandatory scrollbar-none duration-150 cursor-pointer`}
-          ref={refSlide}
-        >
-          {data.map((carItem: CarInfo, index) => (
-            <div
-              id={`item${index}`}
-              key={carItem.id}
-              className="flex items-center flex-shrink-0 w-[250px] snap-start duration-200 overflow-hidden "
-            >
-              <SliderItem
-                id={carItem.id}
-                modelName={carItem.modelName}
-                bodyType={carItem.bodyType}
-                imageUrl={carItem.imageUrl}
-                modelType={carItem.modelType}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* mobile index indicators */}
-        <Indicators
-          data={data}
-          onClick={setCurrentIndex}
-          currentValue={currentIndex}
-        />
-
-        {/* desktop index controller */}
-        <SliderControllers
-          currentValue={currentIndex}
-          data={data}
-          handleScrollNext={handleScrollNext}
-          handleScrollPrev={handleScrollPrev}
-        />
+        {data.map((carItem: CarInfo, index) => (
+          <SliderItem
+            key={carItem.id}
+            id={carItem.id}
+            position={position}
+            index={index}
+            modelName={carItem.modelName}
+            bodyType={carItem.bodyType}
+            imageUrl={carItem.imageUrl}
+            modelType={carItem.modelType}
+          />
+        ))}
       </div>
-    </>
+
+      {/* mobile index indicators */}
+      <Indicators
+        data={data}
+        onClick={setCurrentIndex}
+        currentValue={currentIndex}
+      />
+      {/* desktop index controller */}
+      <SliderControllers
+        onNext={onNext}
+        onPrev={onPrev}
+        data={data}
+        position={position}
+      />
+    </div>
   );
 };
 
