@@ -9,6 +9,7 @@ import Indicators from "../indicators/Indicators";
 import SliderControllers from "../slider-controllers/SliderControllers";
 import { filterByBodyType } from "helpers/filterBodyType";
 import ModelType from "../model-type/ModelType";
+import { useSwipeable } from "react-swipeable";
 
 type Props = {
   dataCar: CarInfo[];
@@ -18,13 +19,27 @@ const Slider = ({ dataCar }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filteredBodyType, setFilteredBodyType] = useState<CarInfo[]>([]);
   const [data, setData] = useState<CarInfo[]>(dataCar);
+  const [width, setWidth] = useState({ innerWidth: 0 });
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [position, setPosition] = useState(0);
+  const handlers = useSwipeable({
+    onSwipedLeft: () => onNext(),
+    onSwipedRight: () => onPrev(),
+    swipeDuration: 200,
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+  });
 
   const onNext = () => {
     console.log(position);
     console.log(data.length - 1);
+
+    if (width.innerWidth < 500) {
+      if (position + 1 !== data.length - 1) {
+        setPosition(position + 1);
+      }
+    }
     if (position + 3 !== data.length - 1) {
       setPosition(position + 1);
     }
@@ -38,6 +53,7 @@ const Slider = ({ dataCar }: Props) => {
   const { scrollXProgress } = useScroll({ container: refSlide });
 
   useEffect(() => {
+    setWidth({ innerWidth: window.innerWidth });
     filterByBodyType(data);
     const filteredCar: CarInfo[] = filterByBodyType(data);
     setFilteredBodyType(filteredCar);
@@ -54,7 +70,7 @@ const Slider = ({ dataCar }: Props) => {
   return (
     <div
       id="carousel"
-      className=" relative h-full bg-violet-300 flex flex-col justify-center items-center w-[1280px]"
+      className="pl-6 py-10 md:pl-0 relative  flex flex-col justify-center items-center md:w-[1280px] w-[400px] overflow-hidden "
     >
       <motion.div
         style={{ scaleX: scrollXProgress }}
@@ -68,8 +84,9 @@ const Slider = ({ dataCar }: Props) => {
         handleOnClickFilterBody={handleOnClickFilterBody}
       />
       <div
+        {...handlers}
         id="row"
-        className={`relative overflow-hidden min-w-5xl boder border-2 bg-green-300 flex h-[400px] w-full`}
+        className={`relative overflow-hidden min-w-5xl flex h-[400px]  w-full`}
       >
         {data.map((carItem: CarInfo, index) => (
           <SliderItem
@@ -86,18 +103,19 @@ const Slider = ({ dataCar }: Props) => {
       </div>
 
       {/* mobile index indicators */}
-      <Indicators
-        data={data}
-        onClick={setCurrentIndex}
-        currentValue={currentIndex}
-      />
-      {/* desktop index controller */}
       <SliderControllers
         onNext={onNext}
         onPrev={onPrev}
         data={data}
         position={position}
       />
+      <Indicators
+        position={position}
+        data={data}
+        onClick={setCurrentIndex}
+        currentValue={currentIndex}
+      />
+      {/* desktop index controller */}
     </div>
   );
 };

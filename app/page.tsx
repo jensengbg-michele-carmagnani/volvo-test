@@ -18,7 +18,7 @@ const HomePage = async (props: Props) => {
   const data = await getCars();
   return (
     <>
-      <div className="flex flex-col justify-center h-screen items-center text-4x relative text-black">
+      <div className="flex flex-col justify-center h-screen items-center text-4x relative overflow-hidden text-black">
         <Slider dataCar={data.carsArray} />
       </div>
     </>
